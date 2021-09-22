@@ -2,7 +2,15 @@
 	{
 		"title": "Website Profil & Database Jemaat",
 		"subtitle": "Website Profil & Database Jemaat GMIT Diaspora Danau Ina Oesapa Timur",
-		"url":  "https://www.gmitdiaspora.org/",
+		"url":  "https://gmitdiaspora.org/",
+		"repo": {
+			"private": true
+		}
+	},
+	{
+		"title": "KIH Virtual",
+		"subtitle": "Aplikasi Android Kelas Ibu Hamil",
+		"url":  "http://play.google.com/store/apps/details?id=com.komodoindotech.kihvirtual",
 		"repo": {
 			"private": true
 		}
@@ -14,14 +22,6 @@
 		"image": "/sc_bernard_anin_official.jpg",
 		"repo": {
 			"url": "https://github.com/agriedd/website-profil-pengacara"
-		}
-	},
-	{
-		"title": "KIH Virtual",
-		"subtitle": "Aplikasi Android Kelas Ibu Hamil",
-		"url":  "http://play.google.com/store/apps/details?id=com.komodoindotech.kihvirtual",
-		"repo": {
-			"private": true
 		}
 	}
 ]
