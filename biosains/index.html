@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Biosains</title>
+    <script src="/js/app.biosains.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=PT+Sans+Narrow&family=Roboto:wght@100;300;600;900&display=swap" rel="stylesheet">
+    <link href="/css/app.biosains.css" rel="stylesheet">
+    <link rel="preload" href="/img/Logo_Undana.png" as="image">
+</head>
+<body>
+    <div id="app">
+        <nav class="p-3 bg-gray-100 lg:bg-gray-50  flex justify-center sticky top-0 z-10 bg-opacity-90 backdrop-blur-md">
+            <div class="text-white max-w-screen-lg w-full">
+                <div class="flex flex-col lg:flex-row justify-between">
+                    <div>
+                        <div class="flex justify-between lg:justify-start">
+                            <div>
+                                <div class="flex">
+                                    <div class="pr-3">
+                                        <div class="flex flex-col justify-center items-center h-full w-12 max-h-11">
+                                            <transition name="fly-down" tag="div" mode="out-in">
+                                                <img src="/img/Logo_Undana.png" alt="" class="h-10 w-10 drop-shadow-xl" :key="0" v-if="navbar.logo.animation == 0">
+                                                <box-icon type='solid' name='bong' size="lg" class="fill-gray-900" :key="1" v-else></box-icon>
+                                            </transition>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="text-2xl font-bold h-font drop-shadow-lg text-gray-900">
+                                            Biosains
+                                        </div>
+                                        <div class="text-sm text-gray-600 -mt-1">
+                                            Laboratorium
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-grow px-2 md:px-5 block lg:hidden">
+                                <div class="h-full flex flex-col justify-center">
+                                    <div>
+                                        <div class="flex">
+                                            <div class="h-10 rounded-md flex-grow
+                                                bg-slate-200
+                                                hover:bg-slate-300 cursor-pointer
+                                                transition-all
+                                                text-gray-500
+                                                ml-4"
+                                                @click="search.searchbar = !search.searchbar">
+                                                <div class="flex flex-nowrap justify-between h-full items-center">
+                                                    <div class="px-3">
+                                                        <div class="h-full">
+                                                            <div class="truncate">
+                                                                Temukan sesuatu
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="px-4">
+                                                        <div class="flex flex-col justify-center h-full items-center">
+                                                            <box-icon name='search' class="fill-gray-400"></box-icon>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="h-font font-bold h-10 w-10 rounded-md 
+                                                hover:bg-slate-200 cursor-pointer items-center
+                                                transition-all
+                                                ml-4"
+                                                @click="navbar.show = !navbar.show">
+                                                <div class="flex flex-col justify-center h-full w-full items-center">
+                                                    <transition mode="out-in" name="fly-down">
+                                                        <box-icon name='menu' class="fill-gray-600" v-if="!navbar.show"></box-icon>
+                                                        <box-icon name='x' class="fill-gray-600" v-else></box-icon>
+                                                    </transition>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div :class="[navbar.show ? 'block lg:block' : 'hidden lg:block']">
+                        <div class="flex flex-col justify-center h-full">
+                            <div class="px-6 lg:px-0">
+                                <div class="flex flex-col lg:flex-row">
+                                    <div class="n-font cursor-pointer text-lg letter-spacing-md px-3 py-2 text-yellow-600">
+                                        Home
+                                    </div>
+                                    <div class="n-font text-lg text-gray-600 letter-spacing-md px-3 py-2 group relative">
+                                        <div class="flex cursor-pointer">
+                                            <div>
+                                                Profil
+                                            </div>
+                                            <div class="pl-2">
+                                                <box-icon name='expand-vertical' size="xs" class="hidden lg:block"></box-icon>
+                                            </div>
+                                        </div>
+                                        <div class="lg:absolute lg:pt-6 lg:invisible lg:group-hover:visible lg:w-80 lg:-translate-x-1/2 lg:left-1/2">
+                                            <ul class="lg:bg-white p-4 rounded-lg lg:shadow-lg w-full lg:max-w-xs lg:relative">
+                                                <li>
+                                                    Mengenai Kami
+                                                </li>
+                                                <li>
+                                                    Visi & Misi
+                                                </li>
+                                                <li class="text-gray-300">
+                                                    Menu lainnya
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="n-font text-lg text-gray-600 letter-spacing-md px-3 py-2 group relative">
+                                        <div class="flex cursor-pointer ">
+                                            <div>
+                                                Layanan
+                                            </div>
+                                            <div class="pl-2">
+                                                <box-icon name='expand-vertical' size="xs" class="hidden lg:block"></box-icon>
+                                            </div>
+                                        </div>
+                                        <div class="lg:absolute lg:pt-6 lg:invisible lg:group-hover:visible lg:w-80 lg:-translate-x-1/2 lg:left-1/2">
+                                            <ul class="lg:bg-white p-4 rounded-lg lg:shadow-lg w-full lg:max-w-xs lg:relative">
+                                                <li>
+                                                    Alat Laboratorium
+                                                </li>
+                                                <li>
+                                                    Kunjungan
+                                                </li>
+                                                <li class="text-gray-300">
+                                                    Menu lainnya
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="n-font cursor-pointer text-lg text-gray-600 letter-spacing-md px-3 py-2">
+                                        Blog
+                                    </div>
+                                    <div class="n-font cursor-pointer text-lg text-gray-600 letter-spacing-md px-3 py-2">
+                                        Portfolio
+                                    </div>
+                                    <div class="n-font cursor-pointer text-lg text-gray-600 letter-spacing-md px-3 py-2">
+                                        Kontak
+                                    </div>
+                                    <div class="h-font font-bold h-10 w-10 rounded-md 
+                                        hover:bg-slate-200 cursor-pointer items-center
+                                        transition-all
+                                        ml-8
+                                        hidden lg:block"
+                                        @click="search.searchbar = !search.searchbar">
+                                        <div class="flex flex-col justify-center h-full w-full items-center">
+                                            <box-icon name='search' class="fill-gray-600"></box-icon>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <transition mode="out-in" name="fly-down">
+            <div class="bg-opacity-50 bg-gray-900 fixed h-screen w-screen z-20 top-0 left-0 justify-center items-center max-h-screen p-5" 
+                :class="[search.searchbar ? 'flex' : 'hidden']"
+                :key="search.searchbar"
+                @click.self="search.searchbar = !search.searchbar">
+                <div class="max-w-lg p-3 w-full flex flex-col justify-start">
+                    <div class="bg-white rounded-md shadow-xl p-2 w-full mb-4">
+                        <div class="flex w-full flex-nowrap">
+                            <input type="text" class="px-3 py-2 border-0 outline-none text-lg w-full flex-grow" placeholder="Temukan sesuatu...">
+                            <button type="submit" class="h-12 w-12">
+                                <div class="flex justify-center items-center fill-slate-500">
+                                    <box-icon name='search'></box-icon>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="max-h-80 h-80">
+                        <div class="flex flex-col h-full justify-start max-h-80">
+                            <div class="bg-white rounded-md shadow-xl w-full overflow-y-auto">
+                                <div class="bg-white border-b p-5 text-gray-400" v-for="i in 5" :key="i">
+                                    <div class="flex">
+                                        <div class="flex-grow">
+                                            <div class="flex">
+                                                <div class="pr-4 fill-gray-300">
+                                                    <box-icon type='solid' name='megaphone' size="sm"></box-icon>
+                                                </div>
+                                                <div class="text-gray-800 font-black">
+                                                    Pengumuman
+                                                </div>
+                                            </div>
+                                            <div class="text-sm text-gray-400">
+                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore ipsa, accusamus ex corporis obcaecati commodi, debitis, odit itaque totam libero quae eos! Quam est provident ad eveniet, aliquam illo rem?
+                                            </div>
+                                        </div>
+                                        <div class="pl-4">
+                                            <div class="fill-gray-400 h-full flex flex-col justify-center items-center">
+                                                <box-icon name='link-external'></box-icon>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </transition>
+        <main>
+			<div class="flex md:flex-row-reverse flex-wrap relative shadow-xl shadow-gray-300">
+				<div class="lg:w-8/12 md:w-5/12 w-full bg-cover md:static absolute top-0 h-full md:h-auto" style="background-image: linear-gradient(85deg, rgb(249, 250, 251) 10%, transparent 50%), url('/img/bg.jpg');">
+					<div class="h-full w-full">
+						<div class="flex flex-col justify-end items-end p-3 h-full w-full">
+							<div class="rounded-lg">
+								<div class="h-10 w-10 rounded-lg flex flex-col justify-center items-center fill-white drop-shadow-lg cursor-pointer hover:bg-yellow-300 hover:bg-opacity-50">
+									<box-icon name='map' type="solid" animation='tada'></box-icon>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="lg:w-4/12 md:w-7/12 w-full bg-gray-50 bg-opacity-90 relative md:backdrop-blur-none backdrop-blur-sm">
+					<div class="flex justify-center lg:-mr-64">
+						<div class="p-4 py-10 max-w-md">
+							<div class="pb-6">
+								<div class="w-24 border-b-4 border-yellow-400"></div>
+							</div>
+							<div class="pb-6">
+								<div class="font-light text-4xl mb-4">
+									Lorem Ipsum
+								</div>
+								<div class="font-extrabold text-4xl">
+									Lorem ipsum dolor sit amet consectetur.
+								</div>
+								<div class="text-gray-700 py-12">
+									Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur enim quos maiores, dolore alias itaque nesciunt eius accusantium aut! Saepe distinctio soluta minus, repellat libero voluptatem aspernatur quibusdam consequatur mollitia.
+								</div>
+								<div class="">
+									<a href="#" class="bg-yellow-300 text-gray-900 px-8 py-3 rounded h-font">
+										Lihat Selengkapnya
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bg-gray-200 pb-10" style="background-image: linear-gradient(1deg, white 10%, transparent 10.1%)">
+				<div class="flex justify-center">
+					<div class="max-w-6xl w-full">
+						<div class="flex flex-wrap justify-between p-10 w-full">
+							<div class="w-full lg:w-4/12 p-4">
+								<div class="flex">
+									<div>
+										<div class="fill-slate-600 pr-5">
+											<box-icon name='atom' size="lg"></box-icon>
+										</div>
+									</div>
+									<div>
+										<div class="mb-5 text-2xl text-gray-700">
+											Lorem ipsum dolor sit.
+										</div>
+										<div class="text-gray-400">
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet quas ullam maiores atque maxime doloribus nobis eius voluptatem repellendus dignissimos!
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="w-full lg:w-4/12 p-4">
+								<div class="flex">
+									<div>
+										<div class="fill-slate-600 pr-5">
+											<box-icon type='solid' name='bong' size="lg"></box-icon>
+										</div>
+									</div>
+									<div>
+										<div class="mb-5 text-2xl text-gray-700">
+											Lorem ipsum dolor sit.
+										</div>
+										<div class="text-gray-400">
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet quas ullam maiores atque maxime doloribus nobis eius voluptatem repellendus dignissimos!
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="w-full lg:w-4/12 p-4">
+								<div class="flex">
+									<div>
+										<div class="fill-slate-600 pr-5">
+											<box-icon name='user' size="lg"></box-icon>
+										</div>
+									</div>
+									<div>
+										<div class="mb-5 text-2xl text-gray-700">
+											Lorem ipsum dolor sit.
+										</div>
+										<div class="text-gray-400">
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet quas ullam maiores atque maxime doloribus nobis eius voluptatem repellendus dignissimos!
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bg-white">
+				<div class="flex justify-center py-20">
+					<div class="max-w-6xl w-full">
+						<div class="flex flex-col items-center">
+							<div class="text-center text-4xl">
+								Advantages and Achievements
+							</div>
+							<div class="text-center pt-10 max-w-lg text-gray-500">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam exercitationem, excepturi illo adipisci laboriosam quae id iste, maxime quidem nisi at, consequatur officiis? Saepe dolorum molestias non deserunt cupiditate officiis!
+							</div>
+						</div>
+						<div class="flex flex-wrap justify-between p-10 w-full">
+							<div class="w-full sm:w-6/12 lg:w-3/12 p-4">
+								<div class="flex flex-col items-center">
+									<div>
+										<div class="fill-yellow-400">
+											<box-icon size="lg" name='atom'></box-icon>
+										</div>
+									</div>
+									<div>
+										<div class="py-5 text-5xl font-extrabold h-font text-gray-800 text-center">
+											120
+										</div>
+										<div class="text-gray-400 text-xl">
+											Lorem ipsum dolor sit.
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="w-full sm:w-6/12 lg:w-3/12 p-4">
+								<div class="flex flex-col items-center">
+									<div>
+										<div class="fill-yellow-400">
+											<box-icon size="lg" type='solid' name='bong'></box-icon>
+										</div>
+									</div>
+									<div>
+										<div class="py-5 text-5xl font-extrabold h-font text-gray-800 text-center">
+											238
+										</div>
+										<div class="text-gray-400 text-xl">
+											Lorem ipsum dolor sit.
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="w-full sm:w-6/12 lg:w-3/12 p-4">
+								<div class="flex flex-col items-center">
+									<div>
+										<div class="fill-yellow-400">
+											<box-icon size="lg" type='solid' name='bong'></box-icon>
+										</div>
+									</div>
+									<div>
+										<div class="py-5 text-5xl font-extrabold h-font text-gray-800 text-center">
+											20
+										</div>
+										<div class="text-gray-400 text-xl">
+											Lorem ipsum dolor sit.
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="w-full sm:w-6/12 lg:w-3/12 p-4">
+								<div class="flex flex-col items-center">
+									<div>
+										<div class="fill-yellow-400">
+											<box-icon size="lg" name='user'></box-icon>
+										</div>
+									</div>
+									<div>
+										<div class="py-5 text-5xl font-extrabold h-font text-gray-800 text-center">
+											54
+										</div>
+										<div class="text-gray-400 text-xl">
+											Lorem ipsum dolor sit.
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bg-white pb-10">
+				<div class="flex justify-center py-5 px-5">
+					<div class="max-w-6xl w-full">
+						<div class="flex flex-col">
+							<div class="text-4xl drop-shadow-sm">
+								Postingan Blog Terbaru
+							</div>
+							<div class="py-6 text-gray-500">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam exercitationem, excepturi illo adipisci laboriosam quae id iste, maxime quidem nisi at, consequatur officiis? Saepe dolorum molestias non deserunt cupiditate officiis!
+							</div>
+						</div>
+						<div class="flex flex-wrap w-full">
+							<div class="w-full md:w-5/12 lg:w-6/12 mb-6 md:mb-0">
+								<div class="h-full flex flex-col justify-between">
+									<div class="flex-grow bg-gray-200 bg-cover" style="min-height: 250px; background-image: url('/img/bg.jpg')">
+		
+									</div>
+									<div class="pt-5">
+										<div class="flex text-purple-900 n-font mb-4">
+											Penulis <span class="px-2">&times;</span> 9 Januari 2022
+										</div>
+										<a href="#" class="flex justify-between">
+											<div class="n-font font-bold text-2xl text-gray-800 letter-spacing-md mb-5">
+												Lorem ipsum dolor sit amet.
+											</div>
+											<div class="pl-3 fill-gray-800">
+												<box-icon name='right-arrow-alt'></box-icon>
+											</div>
+										</a>
+										<div class="text-gray-600">
+											Lorem ipsum dolor sit amet consectetur adipisicing elit. At natus accusamus nostrum. Perspiciatis facilis non laboriosam molestiae minus cupiditate repellat facere iusto iste? Tempore ex facilis vel soluta, nulla reiciendis?
+										</div>
+										<div class="pt-4 flex flex-wrap">
+											<div class="bg-purple-100 text-purple-600 p-2 rounded-lg mr-3 text-xs">
+												Contoh tag
+											</div>
+											<div class="bg-teal-100 text-teal-600 p-2 rounded-lg mr-3 text-xs">
+												Penelitian
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="w-full md:w-7/12 lg:w-6/12 md:pl-6">
+								<div class="flex flex-col">
+									<div class="mb-6">
+										<div class="h-full flex">
+											<div class="flex-grow bg-gray-200 sm:w-6/12 w-4/12">
+			
+											</div>
+											<div class="pl-4 sm:w-6/12 w-8/12">
+												<div class="flex text-purple-900 n-font mb-4">
+													Penulis <span class="px-2">&times;</span> 9 Januari 2022
+												</div>
+												<div class="flex justify-between">
+													<div class="n-font font-bold text-2xl text-gray-800 letter-spacing-md mb-5">
+														Lorem ipsum dolor sit amet.
+													</div>
+													<div class="pl-3 fill-gray-800">
+														<box-icon name='right-arrow-alt'></box-icon>
+													</div>
+												</div>
+												<div class="text-gray-600">
+													Lorem ipsum dolor sit amet consectetur adipisicing elit.
+												</div>
+												<div class="pt-4 flex flex-wrap">
+													<div class="bg-purple-100 text-purple-600 p-2 rounded-lg mr-3 text-xs">
+														Contoh tag
+													</div>
+													<div class="bg-teal-100 text-teal-600 p-2 rounded-lg mr-3 text-xs">
+														Penelitian
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div>
+										<div class="h-full flex">
+											<div class="flex-grow bg-gray-200 sm:w-6/12 w-4/12">
+			
+											</div>
+											<div class="pl-4 sm:w-6/12 w-8/12">
+												<div class="flex n-font mb-4 bg-gray-200 w-32 h-4">
+		
+												</div>
+												<div class="flex justify-between">
+													<div class="n-font text-2xl bg-gray-300 mb-5 w-full h-8">
+													</div>
+													<div class="ml-3 h-8 w-8 bg-gray-300">
+													</div>
+												</div>
+												<div class="text-gray-600">
+													<div class="flex n-font mb-2 bg-gray-200 w-full h-4" v-for="i in 3" :key="i"></div>
+												</div>
+												<div class="pt-4 flex flex-wrap">
+													<div class="bg-gray-100 p-2 rounded-lg mr-3 text-xs w-24 h-8">
+													</div>
+													<div class="bg-gray-100 p-2 rounded-lg mr-3 text-xs w-14 h-8">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="flex pt-6 justify-center">
+							<a href="#" class="px-6 py-4 bg-slate-100 rounded-lg text-gray-800 w-full max-w-xs text-center
+								hover:bg-slate-200 hover:text-gray-900
+								transition-all hover:shadow-sm shadow-gray-200">
+								Postingan Lainnya
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="bg-indigo-600">
+				<div class="py-20 md:px-5">
+					<div>
+						<div class="flex justify-center">
+							<div class="max-w-6xl w-full">
+								<div class="flex flex-col text-center">
+									<div class="text-3xl drop-shadow-sm text-white font-bold h-font">
+										Kontak
+									</div>
+									<div class="pt-3 pb-10 text-white text-center n-font">
+										Lorem ipsum dolor sit amet.
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="flex flex-wrap w-full">
+						<div class="w-full mb-0">
+							<div class="flex justify-center w-full">
+								<div class="w-full max-w-2xl">
+									<div class="flex">
+										<div class="w-4/12 text-white p-4">
+											<div class="rounded-xl h-full px-4 py-4">
+												<div class="pb-1 fill-white">
+													<div class="flex justify-center items-center">
+														<box-icon type='solid' name='map' size="md"></box-icon>
+													</div>
+												</div>
+												<div class="text-center n-font overflow-x-hidden text-ellipsis flex-nowrap">
+													Alamat Lorem, ipsum dolor.
+												</div>
+											</div>
+										</div>
+										<div class="w-4/12 text-white p-4">
+											<div class="rounded-xl h-full px-4 py-4">
+												<div class="pb-1 fill-white">
+													<div class="flex justify-center items-center">
+														<box-icon name='phone' type='solid' size="md"></box-icon>
+													</div>
+												</div>
+												<div class="text-center n-font overflow-x-hidden text-ellipsis flex-nowrap">
+													+62 0000000
+												</div>
+											</div>
+										</div>
+										<div class="w-4/12 text-white p-4">
+											<div class="rounded-xl h-full px-4 py-4 bg-pink-500">
+												<div class="pb-1 fill-white">
+													<div class="flex justify-center items-center">
+														<box-icon name='mail-send' size="md"></box-icon>
+													</div>
+												</div>
+												<div class="text-center n-font overflow-x-hidden text-ellipsis flex-nowrap">
+													Email
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w-full md:p-4">
+							<div class="flex justify-center w-full">
+								<div class="w-full max-w-2xl p-4">
+									<div class="bg-white shadow-2xl rounded-xl p-10">
+										<h3 class="font-bold text-gray-800 h-font mb-10">
+											Form Kontak
+										</h3>
+										<div class="flex flex-wrap">
+											<div class="w-full sm:w-6/12 sm:pr-4">
+												<div class="flex flex-col mb-6">
+													<label for="" class="text-gray-600 text-sm mb-2 font-bold">
+														Nama Anda
+													</label>
+													<input type="text" class="px-3 py-2 border rounded-md w-full" placeholder="Nama Anda">
+												</div>
+												<div class="flex flex-col mb-6">
+													<label for="" class="text-gray-600 text-sm mb-2 font-bold">
+														Alamat Email
+													</label>
+													<input type="email" class="px-3 py-2 border rounded-md w-full" placeholder="username@contoh.com">
+												</div>
+												<div class="flex flex-col mb-6">
+													<label for="" class="text-gray-600 text-sm mb-2 font-bold">
+														Telepon
+													</label>
+													<input type="text" class="px-3 py-2 border rounded-md w-full" placeholder="+62 xxx">
+												</div>
+											</div>
+											<div class="w-full sm:w-6/12 sm:pl-4">
+												<div class="flex flex-col mb-6">
+													<label for="" class="text-gray-600 text-sm mb-2 font-bold">
+														Pesan Anda
+													</label>
+													<textarea class="px-3 py-2 rounded-lg w-full border" rows="9" placeholder="Pesan Anda"></textarea>
+												</div>
+											</div>
+										</div>
+										<div class="flex justify-center items-center pt-10">
+											<div>
+												<button class="px-6 py-4 bg-pink-500 text-white rounded-lg w-56">
+													Kirim Pesan
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </main>
+    </div>
+</body>
+</html>
