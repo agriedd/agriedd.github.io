@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-cache-01';
+const CACHE_NAME = 'my-cache-02';
 const OFFLINE_URL = '/studentday/offline.html';
 
 // Install the Service Worker
@@ -24,8 +24,12 @@ self.addEventListener('fetch', event => {
       .then(cachedResponse => {
         if (cachedResponse) {
           return cachedResponse;
-        } else if (event.request.mode === 'navigate' || (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
-          return caches.match(OFFLINE_URL);
+        }
+        if (event.request.mode === 'navigate' || (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
+          return caches.match(OFFLINE_URL)
+            .then(response => {
+              return response || fetch(event.request);
+            });
         }
         return fetch(event.request);
       })
