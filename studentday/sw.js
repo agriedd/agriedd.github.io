@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-cache';
+const CACHE_NAME = 'my-cache-01';
 const OFFLINE_URL = '/studentday/offline.html';
 
 // Install the Service Worker
@@ -9,8 +9,8 @@ self.addEventListener('install', event => {
         return cache.addAll([
           '/studentday',
           '/studentday/index.html',
-          '/studentday/styles.css',
-          '/studentday/app.js',
+          '/studentday/assets/index-2c0059c2.css',
+          '/studentday/assets/index-5c03fc3f.js',
           OFFLINE_URL
         ])
       })
